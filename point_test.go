@@ -27,3 +27,26 @@ func TestDistance(t *testing.T) {
 
 	}
 }
+
+func TestOnLine(t *testing.T) {
+	var onLineTest = []struct {
+		p        []Point
+		expected bool
+	}{
+		{[]Point{Point{1, 1}, Point{3, 3}, Point{2, 2}}, true},
+		{[]Point{Point{1, 1}, Point{3, 3}, Point{4, 4}}, false},
+		{[]Point{Point{-1, -1}, Point{-3, -3}, Point{-4, -4}}, false},
+		{[]Point{Point{-1, -1}, Point{-3, -3}, Point{-2, -2}}, true},
+	}
+	for _, rt := range onLineTest {
+		actual := onLine(rt.p[0], rt.p[1], rt.p[2])
+		if actual != rt.expected {
+			t.Errorf(
+				"failed spiral:\n\texpected: %d\n\t  actual: %d",
+				rt.expected,
+				actual,
+			)
+		}
+
+	}
+}
