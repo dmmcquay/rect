@@ -54,8 +54,49 @@ func (r Rectangle) Size() float64 {
 	return distance(r.P1, n1) * distance(r.P1, n2)
 }
 
+func (r Rectangle) inOrder() []Point {
+	n1, n2 := r.Neighbors(r.P1)
+	accross := &Point{}
+	if r.P2 != n1 || r.P2 != n2 {
+		accross = &r.P2
+	}
+	if r.P3 != n1 || r.P3 != n2 {
+		accross = &r.P3
+	}
+	if r.P4 != n1 || r.P4 != n2 {
+		accross = &r.P4
+	}
+	return []Point{r.P1, n1, n2, *accross}
+}
+
+func Adjacency(r1, r2 Rectangle) bool {
+	order1 := r1.inOrder()
+	order2 := r2.inOrder()
+
+	sides1 := []line{
+		line{order1[0], order1[1]},
+		line{order1[0], order1[2]},
+		line{order1[3], order1[1]},
+		line{order1[3], order1[2]},
+	}
+	sides2 := []line{
+		line{order2[0], order2[1]},
+		line{order2[0], order2[2]},
+		line{order2[3], order2[1]},
+		line{order2[3], order2[2]},
+	}
+
+	for _, i := range sides1 {
+		for _, j := range sides2 {
+			if lineOnLine(i, j) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
 func sumOfTri(r Rectangle, p Point) bool {
-	rsize := r.Size()
 	n1, n2 := r.Neighbors(r.P1)
 	x1, x2 := Point{}, Point{}
 	accross := &Point{}
@@ -75,7 +116,7 @@ func sumOfTri(r Rectangle, p Point) bool {
 		SizeTriangle(r.P1, n2, p) +
 		SizeTriangle(*accross, x1, p) +
 		SizeTriangle(*accross, x2, p)
-	if rsize == sumTri {
+	if r.Size() == sumTri {
 		return true
 	}
 	return false
