@@ -54,6 +54,40 @@ func (r Rectangle) Size() float64 {
 	return distance(r.P1, n1) * distance(r.P1, n2)
 }
 
-//
-//func Containment(r1, r2, Rectangle) bool {
-//}
+func sumOfTri(r Rectangle, p Point) bool {
+	rsize := r.Size()
+	n1, n2 := r.Neighbors(r.P1)
+	x1, x2 := Point{}, Point{}
+	accross := &Point{}
+	if r.P2 != n1 || r.P2 != n2 {
+		accross = &r.P2
+		x1, x2 = r.Neighbors(r.P2)
+	}
+	if r.P3 != n1 || r.P3 != n2 {
+		accross = &r.P3
+		x1, x2 = r.Neighbors(r.P3)
+	}
+	if r.P4 != n1 || r.P4 != n2 {
+		accross = &r.P4
+		x1, x2 = r.Neighbors(r.P4)
+	}
+	sumTri := SizeTriangle(r.P1, n1, p) +
+		SizeTriangle(r.P1, n2, p) +
+		SizeTriangle(*accross, x1, p) +
+		SizeTriangle(*accross, x2, p)
+	if rsize == sumTri {
+		return true
+	}
+	return false
+}
+
+// Containment returns whether r2 is contained inside of r1
+func Containment(r1, r2 Rectangle) bool {
+	if r1.Size() <= r2.Size() {
+		return false
+	}
+	if sumOfTri(r1, r2.P1) && sumOfTri(r1, r2.P2) && sumOfTri(r1, r2.P3) && sumOfTri(r1, r2.P4) {
+		return true
+	}
+	return false
+}

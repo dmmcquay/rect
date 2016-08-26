@@ -52,3 +52,46 @@ func TestSize(t *testing.T) {
 
 	}
 }
+
+func TestContainment(t *testing.T) {
+	var containmentTest = []struct {
+		r        []Rectangle
+		expected bool
+	}{
+		{
+			[]Rectangle{
+				Rectangle{Point{0, 0}, Point{0, 3}, Point{3, 0}, Point{3, 3}},
+				Rectangle{Point{1, 1}, Point{1, 2}, Point{2, 1}, Point{2, 2}}},
+			true,
+		},
+		{
+			[]Rectangle{
+				Rectangle{Point{0, 0}, Point{0, 3}, Point{3, 0}, Point{3, 3}},
+				Rectangle{Point{1, 1}, Point{1, 2}, Point{2, 1}, Point{2, 2}}},
+			true,
+		},
+		{
+			[]Rectangle{
+				Rectangle{Point{0, 0}, Point{0, 3}, Point{3, 0}, Point{3, 3}},
+				Rectangle{Point{0, 0}, Point{0, 3}, Point{3, 0}, Point{3, 3}}},
+			false,
+		},
+		{
+			[]Rectangle{
+				Rectangle{Point{0, 0}, Point{0, 3}, Point{3, 0}, Point{3, 3}},
+				Rectangle{Point{3, 3}, Point{3, 4}, Point{4, 3}, Point{4, 4}}},
+			false,
+		},
+	}
+	for _, rt := range containmentTest {
+		actual := Containment(rt.r[0], rt.r[1])
+		if actual != rt.expected {
+			t.Errorf(
+				"failed spiral:\n\texpected: %d\n\t  actual: %d",
+				rt.expected,
+				actual,
+			)
+		}
+
+	}
+}
