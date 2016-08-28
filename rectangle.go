@@ -90,16 +90,16 @@ func Adjacency(r1, r2 Rectangle) bool {
 	order2 := r2.inOrder()
 
 	sides1 := []line{
-		line{order1[0], order1[1]},
-		line{order1[0], order1[2]},
-		line{order1[3], order1[1]},
-		line{order1[3], order1[2]},
+		{order1[0], order1[1]},
+		{order1[0], order1[2]},
+		{order1[3], order1[1]},
+		{order1[3], order1[2]},
 	}
 	sides2 := []line{
-		line{order2[0], order2[1]},
-		line{order2[0], order2[2]},
-		line{order2[3], order2[1]},
-		line{order2[3], order2[2]},
+		{order2[0], order2[1]},
+		{order2[0], order2[2]},
+		{order2[3], order2[1]},
+		{order2[3], order2[2]},
 	}
 
 	for _, i := range sides1 {
@@ -133,16 +133,16 @@ func Intersection(r1, r2 Rectangle) []Point {
 	order2 := r2.inOrder()
 
 	sides1 := []line{
-		line{order1[0], order1[1]},
-		line{order1[0], order1[2]},
-		line{order1[3], order1[1]},
-		line{order1[3], order1[2]},
+		{order1[0], order1[1]},
+		{order1[0], order1[2]},
+		{order1[3], order1[1]},
+		{order1[3], order1[2]},
 	}
 	sides2 := []line{
-		line{order2[0], order2[1]},
-		line{order2[0], order2[2]},
-		line{order2[3], order2[1]},
-		line{order2[3], order2[2]},
+		{order2[0], order2[1]},
+		{order2[0], order2[2]},
+		{order2[3], order2[1]},
+		{order2[3], order2[2]},
 	}
 
 	pts := []Point{}
