@@ -16,10 +16,10 @@ func TestIsRect(t *testing.T) {
 		{Rectangle{P1: Point{0, 0}, P2: Point{0, 0}, P3: Point{0, 0}, P4: Point{0, 0}}, false},
 	}
 	for _, rt := range isRectTests {
-		actual := rt.r.isRect()
+		actual := rt.r.IsRect()
 		if actual != rt.expected {
 			t.Errorf(
-				"failed isRect:\n\texpected: %t\n\t  actual: %t",
+				"failed IsRect:\n\texpected: %t\n\t  actual: %t",
 				rt.expected,
 				actual,
 			)
@@ -29,7 +29,7 @@ func TestIsRect(t *testing.T) {
 }
 
 func TestSize(t *testing.T) {
-	var isRectTests = []struct {
+	var sizeTests = []struct {
 		r        Rectangle
 		expected float64
 	}{
@@ -40,7 +40,7 @@ func TestSize(t *testing.T) {
 		{Rectangle{P1: Point{0, 0}, P2: Point{0, 3}, P3: Point{2, 0}, P4: Point{2, 3}}, 6},
 		{Rectangle{P1: Point{0, 0}, P2: Point{0, 100}, P3: Point{100, 0}, P4: Point{100, 100}}, 10000},
 	}
-	for _, rt := range isRectTests {
+	for _, rt := range sizeTests {
 		actual := rt.r.size()
 		if actual != rt.expected {
 			t.Errorf(
@@ -160,7 +160,7 @@ func TestIntersection(t *testing.T) {
 			[]Rectangle{
 				Rectangle{Point{0, 0}, Point{0, 3}, Point{3, 0}, Point{3, 3}},
 				Rectangle{Point{0, 0}, Point{0, -1}, Point{-1, 0}, Point{-1, -1}}},
-			[]Point{Point{0, 0}, Point{0, 0}},
+			[]Point{Point{0, 0}},
 		},
 		{
 			[]Rectangle{

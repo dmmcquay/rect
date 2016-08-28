@@ -14,10 +14,10 @@ type Rectangle struct {
 // maximum error used for floating point math
 var ɛ = 0.00001
 
-// isRect determins if the rectangle provided really is a rectangle, which
+// IsRect determins if the rectangle provided really is a rectangle, which
 // by definition means a plane figure with four straight sides and four
 // right angles.
-func (r Rectangle) isRect() bool {
+func (r Rectangle) IsRect() bool {
 	// make sure they aren't all just the same point
 	if (r.P1.X == r.P2.X && r.P1.X == r.P3.X && r.P1.X == r.P4.X) &&
 		(r.P1.Y == r.P2.Y && r.P1.Y == r.P3.Y && r.P1.Y == r.P4.Y) {
@@ -112,6 +112,19 @@ func Adjacency(r1, r2 Rectangle) bool {
 	return false
 }
 
+func removeDuplicates(xs *[]Point) {
+	found := make(map[Point]bool)
+	j := 0
+	for i, x := range *xs {
+		if !found[x] {
+			found[x] = true
+			(*xs)[j] = (*xs)[i]
+			j++
+		}
+	}
+	*xs = (*xs)[:j]
+}
+
 // Intersection determine whether two rectangles, r1 and r2, have one or more
 // intersecting lines and produce a result, []Point, identifying the points
 // of intersection
@@ -141,6 +154,8 @@ func Intersection(r1, r2 Rectangle) []Point {
 			}
 		}
 	}
+
+	removeDuplicates(&pts)
 	return pts
 }
 
