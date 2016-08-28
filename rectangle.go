@@ -5,6 +5,8 @@ import (
 	"sort"
 )
 
+// Rectangle struct defines a plane figure with four straight sides
+// and four right angles, which contains 4 vertixes points, P1 through P4
 type Rectangle struct {
 	P1, P2, P3, P4 Point
 }
@@ -12,6 +14,9 @@ type Rectangle struct {
 // maximum error used for floating point math
 var ɛ = 0.00001
 
+// isRect determins if the rectangle provided really is a rectangle, which
+// by definition means a plane figure with four straight sides and four
+// right angles.
 func (r Rectangle) isRect() bool {
 	// make sure they aren't all just the same point
 	if (r.P1.X == r.P2.X && r.P1.X == r.P3.X && r.P1.X == r.P4.X) &&
@@ -29,6 +34,8 @@ func (r Rectangle) isRect() bool {
 	return math.Abs(dd1-dd2) < ɛ && math.Abs(dd1-dd3) < ɛ && math.Abs(dd1-dd4) < ɛ
 }
 
+// neighbors returns the two points that form the line which creates the right
+// angle of the point passed in as a parameter.
 func (r Rectangle) neighbors(p Point) (Point, Point) {
 	keys := []float64{distance(r.P1, p), distance(r.P2, p), distance(r.P3, p), distance(r.P4, p)}
 	sort.Float64s(keys)
@@ -52,11 +59,15 @@ func (r Rectangle) neighbors(p Point) (Point, Point) {
 	return n[0], n[1]
 }
 
+// size returns the size of the Rectangle
 func (r Rectangle) size() float64 {
 	n1, n2 := r.neighbors(r.P1)
 	return distance(r.P1, n1) * distance(r.P1, n2)
 }
 
+// inOrder returns a []Point, let us call pts, in which the four sides of the
+// Rectangle can be defined as pts[0] -- pts[1], pts[0] -- pts[2],
+// pts[3] -- pts[1], and pts[3] -- pts[2]
 func (r Rectangle) inOrder() []Point {
 	n1, n2 := r.neighbors(r.P1)
 	accross := &Point{}
@@ -72,6 +83,8 @@ func (r Rectangle) inOrder() []Point {
 	return []Point{r.P1, n1, n2, *accross}
 }
 
+// Adjacency detects whether two rectangles, r1, and r2, are adjacent.
+// Adjacency is defined as the sharing of a side
 func Adjacency(r1, r2 Rectangle) bool {
 	order1 := r1.inOrder()
 	order2 := r2.inOrder()
@@ -99,6 +112,9 @@ func Adjacency(r1, r2 Rectangle) bool {
 	return false
 }
 
+// Intersection determine whether two rectangles, r1 and r2, have one or more
+// intersecting lines and produce a result, []Point, identifying the points
+// of intersection
 func Intersection(r1, r2 Rectangle) []Point {
 	order1 := r1.inOrder()
 	order2 := r2.inOrder()
@@ -128,6 +144,10 @@ func Intersection(r1, r2 Rectangle) []Point {
 	return pts
 }
 
+// sumOfTri determines if the sum of the areas of the triangles created from
+// point p to two neighboring vertices of a side of the Rectangle, r, add up
+// to the same size as the Rectangle, r.  This is one way to determine if
+// a point is inside of a Rectangle.
 func sumOfTri(r Rectangle, p Point) bool {
 	n1, n2 := r.neighbors(r.P1)
 	x1, x2 := Point{}, Point{}
