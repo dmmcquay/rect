@@ -19,7 +19,7 @@ func TestDistance(t *testing.T) {
 		actual := distance(rt.p[0], rt.p[1])
 		if actual != rt.expected {
 			t.Errorf(
-				"failed spiral:\n\texpected: %d\n\t  actual: %d",
+				"failed distance:\n\texpected: %f\n\t  actual: %f",
 				rt.expected,
 				actual,
 			)
@@ -42,7 +42,7 @@ func TestOnLine(t *testing.T) {
 		actual := onLine(rt.p[0], rt.p[1], rt.p[2])
 		if actual != rt.expected {
 			t.Errorf(
-				"failed spiral:\n\texpected: %d\n\t  actual: %d",
+				"failed onLine:\n\texpected: %t\n\t  actual: %t",
 				rt.expected,
 				actual,
 			)
@@ -65,7 +65,7 @@ func TestLineIntersection(t *testing.T) {
 		actual, _ := lineIntersection(rt.l[0], rt.l[1])
 		if actual != rt.expected {
 			t.Errorf(
-				"failed spiral:\n\texpected: %f\n\t  actual: %f",
+				"failed lineIntersection:\n\texpected: %v\n\t  actual: %v",
 				rt.expected,
 				actual,
 			)

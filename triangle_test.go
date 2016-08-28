@@ -15,7 +15,7 @@ func TestSizeTriangle(t *testing.T) {
 		actual := SizeTriangle(rt.pts[0], rt.pts[1], rt.pts[2])
 		if actual != rt.expected {
 			t.Errorf(
-				"failed spiral:\n\texpected: %d\n\t  actual: %d",
+				"failed sizeTriangle:\n\texpected: %f\n\t  actual: %f",
 				rt.expected,
 				actual,
 			)

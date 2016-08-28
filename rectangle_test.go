@@ -19,7 +19,7 @@ func TestIsRect(t *testing.T) {
 		actual := rt.r.IsRect()
 		if actual != rt.expected {
 			t.Errorf(
-				"failed spiral:\n\texpected: %d\n\t  actual: %d",
+				"failed isRect:\n\texpected: %t\n\t  actual: %t",
 				rt.expected,
 				actual,
 			)
@@ -44,7 +44,7 @@ func TestSize(t *testing.T) {
 		actual := rt.r.Size()
 		if actual != rt.expected {
 			t.Errorf(
-				"failed spiral:\n\texpected: %d\n\t  actual: %d",
+				"failed size:\n\texpected: %f\n\t  actual: %f",
 				rt.expected,
 				actual,
 			)
@@ -87,7 +87,7 @@ func TestContainment(t *testing.T) {
 		actual := Containment(rt.r[0], rt.r[1])
 		if actual != rt.expected {
 			t.Errorf(
-				"failed spiral:\n\texpected: %d\n\t  actual: %d",
+				"failed Containment:\n\texpected: %t\n\t  actual: %t",
 				rt.expected,
 				actual,
 			)
@@ -136,7 +136,7 @@ func TestAdjacency(t *testing.T) {
 		actual := Adjacency(rt.r[0], rt.r[1])
 		if actual != rt.expected {
 			t.Errorf(
-				"failed spiral:\n\texpected: %d\n\t  actual: %d",
+				"failed adjacency:\n\texpected: %t\n\t  actual: %t",
 				rt.expected,
 				actual,
 			)
@@ -173,7 +173,7 @@ func TestIntersection(t *testing.T) {
 		actual := Intersection(rt.r[0], rt.r[1])
 		if len(actual) != len(rt.expected) {
 			t.Errorf(
-				"failed spiral:\n\texpected: %d\n\t  actual: %d",
+				"failed intersection:\n\texpected: %d\n\t  actual: %d",
 				len(rt.expected),
 				len(actual),
 			)
@@ -182,7 +182,7 @@ func TestIntersection(t *testing.T) {
 		for i, _ := range actual {
 			if actual[i] != rt.expected[i] {
 				t.Errorf(
-					"failed spiral:\n\texpected: %d\n\t  actual: %d",
+					"failed intersection:\n\texpected: %v\n\t  actual: %v",
 					rt.expected[i],
 					actual[i],
 				)
