@@ -16,7 +16,7 @@ func TestIsRect(t *testing.T) {
 		{Rectangle{P1: Point{0, 0}, P2: Point{0, 0}, P3: Point{0, 0}, P4: Point{0, 0}}, false},
 	}
 	for _, rt := range isRectTests {
-		actual := rt.r.IsRect()
+		actual := rt.r.isRect()
 		if actual != rt.expected {
 			t.Errorf(
 				"failed isRect:\n\texpected: %t\n\t  actual: %t",
@@ -41,7 +41,7 @@ func TestSize(t *testing.T) {
 		{Rectangle{P1: Point{0, 0}, P2: Point{0, 100}, P3: Point{100, 0}, P4: Point{100, 100}}, 10000},
 	}
 	for _, rt := range isRectTests {
-		actual := rt.r.Size()
+		actual := rt.r.size()
 		if actual != rt.expected {
 			t.Errorf(
 				"failed size:\n\texpected: %f\n\t  actual: %f",
