@@ -50,3 +50,26 @@ func TestOnLine(t *testing.T) {
 
 	}
 }
+
+func TestLineIntersection(t *testing.T) {
+	var lineIntersectionTest = []struct {
+		l        []line
+		expected Point
+	}{
+		{[]line{line{Point{0, 0}, Point{2, 2}}, line{Point{2, 0}, Point{0, 2}}}, Point{1, 1}},
+		{[]line{line{Point{0, 0}, Point{-2, -2}}, line{Point{-2, 0}, Point{0, -2}}}, Point{-1, -1}},
+		{[]line{line{Point{0, 0}, Point{-2, -2}}, line{Point{1, 0}, Point{1, -7}}}, Point{0, 0}},
+		{[]line{line{Point{5, 8}, Point{8, 5}}, line{Point{3, 7}, Point{7, 3}}}, Point{0, 0}},
+	}
+	for _, rt := range lineIntersectionTest {
+		actual := lineIntersection(rt.l[0], rt.l[1])
+		if actual != rt.expected {
+			t.Errorf(
+				"failed spiral:\n\texpected: %f\n\t  actual: %f",
+				rt.expected,
+				actual,
+			)
+		}
+
+	}
+}
