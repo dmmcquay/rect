@@ -11,7 +11,7 @@ func distance(p1, p2 Point) float64 {
 }
 
 func onLine(rp1, rp2, p Point) bool {
-	if distance(rp1, p)+distance(rp2, p) == distance(rp1, rp2) {
+	if math.Abs(distance(rp1, p)+distance(rp2, p)-distance(rp1, rp2)) < ɛ {
 		minx, maxx := math.Min(rp1.X, rp2.X), math.Max(rp1.X, rp2.X)
 		miny, maxy := math.Min(rp1.Y, rp2.Y), math.Max(rp1.Y, rp2.Y)
 		if minx <= p.X && p.X <= maxx && miny <= p.Y && p.Y <= maxy {

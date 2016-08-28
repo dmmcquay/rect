@@ -12,7 +12,7 @@ func TestSizeTriangle(t *testing.T) {
 		{[]Point{Point{10, 14}, Point{20, 15}, Point{12, 52}}, 189},
 	}
 	for _, rt := range sizeTriangleTests {
-		actual := SizeTriangle(rt.pts[0], rt.pts[1], rt.pts[2])
+		actual := sizeTriangle(rt.pts[0], rt.pts[1], rt.pts[2])
 		if actual != rt.expected {
 			t.Errorf(
 				"failed sizeTriangle:\n\texpected: %f\n\t  actual: %f",
