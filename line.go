@@ -10,7 +10,7 @@ type line struct {
 	pt1, pt2 Point
 }
 
-// determinants aids by calculating necesary values for performing
+// determinants aids by calculating necessary values for performing
 // calculations using the determinant of two points
 func determinants(l line) (float64, float64, float64) {
 	a := l.pt2.Y - l.pt1.Y

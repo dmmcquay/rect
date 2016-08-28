@@ -70,17 +70,17 @@ func (r Rectangle) size() float64 {
 // pts[3] -- pts[1], and pts[3] -- pts[2]
 func (r Rectangle) inOrder() []Point {
 	n1, n2 := r.neighbors(r.P1)
-	accross := &Point{}
+	across := &Point{}
 	if r.P2 != n1 || r.P2 != n2 {
-		accross = &r.P2
+		across = &r.P2
 	}
 	if r.P3 != n1 || r.P3 != n2 {
-		accross = &r.P3
+		across = &r.P3
 	}
 	if r.P4 != n1 || r.P4 != n2 {
-		accross = &r.P4
+		across = &r.P4
 	}
-	return []Point{r.P1, n1, n2, *accross}
+	return []Point{r.P1, n1, n2, *across}
 }
 
 // Adjacency detects whether two rectangles, r1, and r2, are adjacent.
@@ -151,23 +151,23 @@ func Intersection(r1, r2 Rectangle) []Point {
 func sumOfTri(r Rectangle, p Point) bool {
 	n1, n2 := r.neighbors(r.P1)
 	x1, x2 := Point{}, Point{}
-	accross := &Point{}
+	across := &Point{}
 	if r.P2 != n1 || r.P2 != n2 {
-		accross = &r.P2
+		across = &r.P2
 		x1, x2 = r.neighbors(r.P2)
 	}
 	if r.P3 != n1 || r.P3 != n2 {
-		accross = &r.P3
+		across = &r.P3
 		x1, x2 = r.neighbors(r.P3)
 	}
 	if r.P4 != n1 || r.P4 != n2 {
-		accross = &r.P4
+		across = &r.P4
 		x1, x2 = r.neighbors(r.P4)
 	}
 	sumTri := sizeTriangle(r.P1, n1, p) +
 		sizeTriangle(r.P1, n2, p) +
-		sizeTriangle(*accross, x1, p) +
-		sizeTriangle(*accross, x2, p)
+		sizeTriangle(*across, x1, p) +
+		sizeTriangle(*across, x2, p)
 	if math.Abs(r.size()-sumTri) < ɛ {
 		return true
 	}

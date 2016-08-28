@@ -179,7 +179,7 @@ func TestIntersection(t *testing.T) {
 			)
 			continue
 		}
-		for i, _ := range actual {
+		for i := range actual {
 			if actual[i] != rt.expected[i] {
 				t.Errorf(
 					"failed intersection:\n\texpected: %v\n\t  actual: %v",
