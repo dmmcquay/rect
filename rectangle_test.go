@@ -97,7 +97,7 @@ func TestContainment(t *testing.T) {
 }
 
 func TestAdjacency(t *testing.T) {
-	var adjacencyTest = []struct {
+	var adjacencyTests = []struct {
 		r        []Rectangle
 		expected bool
 	}{
@@ -132,7 +132,7 @@ func TestAdjacency(t *testing.T) {
 			true,
 		},
 	}
-	for _, rt := range adjacencyTest {
+	for _, rt := range adjacencyTests {
 		actual := Adjacency(rt.r[0], rt.r[1])
 		if actual != rt.expected {
 			t.Errorf(
@@ -140,6 +140,53 @@ func TestAdjacency(t *testing.T) {
 				rt.expected,
 				actual,
 			)
+		}
+
+	}
+}
+
+func TestIntersection(t *testing.T) {
+	var intersectionTests = []struct {
+		r        []Rectangle
+		expected []Point
+	}{
+		{
+			[]Rectangle{
+				Rectangle{Point{0, 0}, Point{0, 3}, Point{3, 0}, Point{3, 3}},
+				Rectangle{Point{2, 1}, Point{2, 2}, Point{4, 1}, Point{4, 2}}},
+			[]Point{Point{3, 1}, Point{3, 2}},
+		},
+		{
+			[]Rectangle{
+				Rectangle{Point{0, 0}, Point{0, 3}, Point{3, 0}, Point{3, 3}},
+				Rectangle{Point{0, 0}, Point{0, -1}, Point{-1, 0}, Point{-1, -1}}},
+			[]Point{Point{0, 0}, Point{0, 0}},
+		},
+		{
+			[]Rectangle{
+				Rectangle{Point{2, 1}, Point{2, 2}, Point{4, 1}, Point{4, 2}},
+				Rectangle{Point{0, 0}, Point{0, -1}, Point{-1, 0}, Point{-1, -1}}},
+			[]Point{},
+		},
+	}
+	for _, rt := range intersectionTests {
+		actual := Intersection(rt.r[0], rt.r[1])
+		if len(actual) != len(rt.expected) {
+			t.Errorf(
+				"failed spiral:\n\texpected: %d\n\t  actual: %d",
+				len(rt.expected),
+				len(actual),
+			)
+			continue
+		}
+		for i, _ := range actual {
+			if actual[i] != rt.expected[i] {
+				t.Errorf(
+					"failed spiral:\n\texpected: %d\n\t  actual: %d",
+					rt.expected[i],
+					actual[i],
+				)
+			}
 		}
 
 	}
