@@ -96,6 +96,35 @@ func Adjacency(r1, r2 Rectangle) bool {
 	return false
 }
 
+func Intersection(r1, r2 Rectangle) []Point {
+	order1 := r1.inOrder()
+	order2 := r2.inOrder()
+
+	sides1 := []line{
+		line{order1[0], order1[1]},
+		line{order1[0], order1[2]},
+		line{order1[3], order1[1]},
+		line{order1[3], order1[2]},
+	}
+	sides2 := []line{
+		line{order2[0], order2[1]},
+		line{order2[0], order2[2]},
+		line{order2[3], order2[1]},
+		line{order2[3], order2[2]},
+	}
+
+	pts := []Point{}
+	for _, i := range sides1 {
+		for _, j := range sides2 {
+			p, err := lineIntersection(i, j)
+			if err == nil {
+				pts = append(pts, p)
+			}
+		}
+	}
+	return pts
+}
+
 func sumOfTri(r Rectangle, p Point) bool {
 	n1, n2 := r.Neighbors(r.P1)
 	x1, x2 := Point{}, Point{}
